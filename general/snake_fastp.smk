@@ -28,5 +28,7 @@ rule FASTP:
         lambda wildcards: config["samples"][wildcards.sample]
     output:
         trimmed="trimmed/{sample}_trimmed.fastq",
+        json="fastpReport/{sample}",
+        html="fastpReport/{sample}",
     shell:
-        "fastp -i {input} -f 30 -b 400 -o {output}"
+        "fastp -i {input} -f 30 -b 400 -o {output.trimmed} -j {output.json} -h {output.html}"
